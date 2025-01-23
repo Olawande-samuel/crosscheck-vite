@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+:root {
+	--mainWhite: #f3f3f3;
+	--lightBlue: #0092e0;
+	--mainBlue: #60c2e0;
+	--lightDark: #707070;
+}
+.app {
+	background: white;
+}
+@font-face {
+	font-family: segoesemiLight;
+	src: url("/fonts/segoeuisl.ttf");
+}
+@font-face {
+	font-family: orkneyBold;
+	src: url("/fonts/orkney-bold.otf");
+}
+@font-face {
+	font-family: orkneyLight;
+	src: url("/fonts/orkney-light.otf");
+}
+@font-face {
+	font-family: segoebold;
+	src: url("/fonts/segoeuib.ttf");
+}
+@font-face {
+	font-family: segoeRegular;
+	src: url("/fonts/segoeuireg.ttf");
+}
+@font-face {
+	font-family: segoeSemiBold;
+	src: url("/fonts/seguisb.ttf");
+}
+/* @font-face {
+	font-family: MontserratLight;
+	src: url("/fonts/Montserrat-Light.otf");
+}
+@font-face {
+	font-family: MontserratSemibold;
+	src: url("/fonts/Montserrat-SemiBold.otf");
+}
+@font-face {
+	font-family: MontserratRegular;
+	src: url("/fonts/Montserrat-Regular.ttf");
+	src: url("/fonts/MontserratRegular.woff");
+}
+
+@font-face {
+	font-family: MontserratBold;
+	src: url("/fonts/Montserrat-Bold.otf");
+	src: url("/fonts/Montserrat-Bold.woff");
+	src: url("/fonts/Montserrat-Bold.eot");
+}
+@font-face {
+	font-family: MontserratItalic;
+	src: url("/fonts/Montserrat-Italic.otf");
+} */
+@font-face {
+	font-family: SegoeSemiBold;
+	src: url("/fonts/seguisb.ttf");
+}
+@font-face {
+	font-family: SegoeRegular;
+	src: url("/fonts/segoeui.ttf");
+	src: url("/fonts/SegoeUI.woff");
+	src: url("/fonts/segoeui.eot");
+}
+@font-face {
+	font-family: SegoeBlack;
+	src: url("/fonts/SegoeUIBlack.woff");
+}
