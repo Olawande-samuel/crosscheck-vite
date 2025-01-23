@@ -3,18 +3,16 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // import FacebookLogin from "react-facebook-login";
 // import GoogleLogin from "react-google-login";
-import { FacebookProvider, LoginButton } from "react-facebook";
-import {
-	faEye,
-	faEyeSlash,
-} from "@fortawesome/free-solid-svg-icons";
+import { Button } from "@/components/ui/button";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { GoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import { useFormik } from "formik";
+import { FacebookIcon } from "lucide-react";
+import { FacebookProvider, LoginButton } from "react-facebook";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import Check from "../../asset/check.svg";
 import crosscheckTm from "../../asset/crosscheckTm.svg";
 import {
 	login,
@@ -25,8 +23,6 @@ import {
 import { RootState } from "../../state/reducers";
 import "./auth.css";
 import { loginValidation } from "./Validation";
-import { Button } from "@/components/ui/button";
-import { FacebookIcon } from "lucide-react";
 
 function Login() {
 	const [visibility, setVisibility] = useState(false);
@@ -215,18 +211,7 @@ function Login() {
 								<button type="submit" className="register-button loginbtn">
 									{loading ? "Signing in..." : "LOGIN"}
 								</button>
-								{/* <div className="terms">
-              <div className="accept">
-                <input
-                  type="checkbox"
-                  name="check"
-                  className="check"
-                  style={{ marginRight: "10px" }}
-                />
-                <span>Remember me</span>
-              </div>
-              <Link to="/forgotpassword">Forgot password?</Link>
-            </div> */}
+
 								<div
 									className="terms"
 									style={{
@@ -234,21 +219,20 @@ function Login() {
 										justifyContent: "space-between",
 									}}
 								>
-									<div
-										className="accept"
-										onClick={() => setRemember(!remember)}
-									>
-										<div
-											className="agree-box"
-											style={{
-												background: remember ? "#0092e0" : "",
-												borderColor: remember ? "#0092e0" : "#e2e2e2",
-											}}
-										>
-											{remember && <Check />}
-										</div>
-										<span>Remember me</span>
+									<div className="flex items-center gap-1 flex-wrap">
+										<input
+											type="checkbox"
+											name="remember"
+											id="remember"
+											className="border border-gray-400 accent-[#0092e0]"
+											checked={remember}
+											onChange={() => setRemember(!remember)}
+										/>
+										<label htmlFor="remember" className="mb-0">
+											Remember me
+										</label>
 									</div>
+
 									<Link to="/forgotpassword">Forgot password?</Link>
 								</div>
 								<div
