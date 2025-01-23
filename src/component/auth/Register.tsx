@@ -142,7 +142,7 @@ function Register() {
 			<div className="flex-1 w-full flex flex-col xl:flex-row">
 				<div className="xl:basis-[40%] bg-white flex-1">
 					{success ? (
-						<div className="bg-white size-full  h-screen mx-auto">
+						<div className="bg-white size-full p-6 h-screen mx-auto">
 							<div className="shadow-md flex flex-col items-center h-fit rounded-[15px] mx-auto  max-w-[600px] p-4 md:p-6">
 								<h3 className=" text-[#0092e0] text-xl font-['poppins'] mb-4 font-semibold">
 									Account created successfully

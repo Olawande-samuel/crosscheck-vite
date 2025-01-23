@@ -56,17 +56,17 @@ const ForgotPassword = () => {
 		}),
 	});
 	return (
-		<div className="forgot-password">
+		<div className="forgot-password py-10">
 			<form>
 				{success ? (
 					<>
-						<p className="forgot-password-content">
+						<p className="forgot-password-content leading-[19.6px]">
 							Check your inbox for the next steps. If you don't receive an
 							email, and it's not in your spam folder this could mean you signed
 							up with a different address.
 						</p>
-						<p className="has-account">
-							Have an account?
+						<p className="has-account mt-6">
+							Have an account?{" "}
 							<Link
 								to="/login"
 								style={{ color: "#0092e0", textDecoration: "none" }}
@@ -77,17 +77,25 @@ const ForgotPassword = () => {
 					</>
 				) : (
 					<Div>
-						<img src={Logo} alt="CrossCheck" className="forgot-pass-img" />
-						<h3 style={{ textAlign: "center" }}>
-							Having troubles with your password?
-						</h3>
-						{loginError.length > 0 && (
-							<p style={{ color: "red", textAlign: "center" }}>{loginError}</p>
-						)}
-						<p className="enter-email">
-							Please enter the email address with which you registered, and
-							we’ll send you an email with further instructions.
-						</p>
+						<img
+							src={Logo}
+							alt="CrossCheck"
+							className="forgot-pass-img mb-12"
+						/>
+						<div className="space-y-3 mb-6">
+							<h3 style={{ textAlign: "center" }}>
+								Having troubles with your password?
+							</h3>
+							{loginError.length > 0 && (
+								<p style={{ color: "red", textAlign: "center" }}>
+									{loginError}
+								</p>
+							)}
+							<p className="enter-email text-center mx-auto">
+								Please enter the email address with which you registered, and
+								we’ll send you an email with further instructions.
+							</p>
+						</div>
 						<div
 							className="password-input fields"
 							style={{ marginTop: "10px" }}
@@ -115,7 +123,7 @@ const ForgotPassword = () => {
 						>
 							{loading ? "Requesting..." : "SUBMIT"}
 						</button>
-						<div className="reset-create">
+						<div className="reset-create mt-6">
 							{/* <p>
                 <Link
                   to="/"

@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { Loader } from "lucide-react";
+import { Loader, XCircle } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 import { API } from "../../api/endpoints";
@@ -13,10 +13,9 @@ function AccountVerification() {
 		queryFn: () => API.verifyUser({ token: token as string }),
 		queryKey: ["verify user"],
 		enabled: !!token,
-		staleTime: Infinity,
-	});
 
-	console.log(data);
+
+	});
 
 	if (isLoading) {
 		return (
@@ -26,31 +25,45 @@ function AccountVerification() {
 		);
 	}
 
+	if (!isLoading && data?.status === 200) {
+		return (
+			<Div>
+				<div className="bg-white shadow-md py-6 rounded-[25px] w-full max-w-[400px] flex flex-col items-center">
+					<img
+						src={Activated}
+						alt="activated"
+						className="mx-auto mb-8"
+						width={154}
+						height={154}
+					/>
+					<p className="mb-4 capitalize text-2xl font-['poppins'] tracking-normal text-[#707070]">
+						Account activated
+					</p>
+					<Link
+						to="/login"
+						className="font-['poppins'] font-bold  capitalize no-underline bg-[#0092e0] text-white tracking-[0.32px] text-sm rounded-[30px] px-[25px] py-[15px]  "
+					>
+						Log in
+					</Link>
+				</div>
+			</Div>
+		);
+	}
+
 	return (
 		<Div>
 			<div className="bg-white shadow-md py-6 rounded-[25px] w-full max-w-[400px] flex flex-col items-center">
-				<img
-					src={Activated}
-					alt="activated"
-					className="mx-auto mb-8"
-					width={154}
-					height={154}
-				/>
-				<p className="mb-4 capitalize text-2xl font-['poppins'] tracking-normal text-[#707070]">
-					Account activated
+				<XCircle color="red" size={40} />
+				<p className="capitalize text-2xl mt-4 font-['poppins'] tracking-normal text-[#707070]">
+					Failed to activate account
 				</p>
-				<Link
-					to="/login"
-					className="font-['poppins'] font-bold  capitalize no-underline bg-[#0092e0] text-white tracking-[0.32px] text-sm rounded-[30px] px-[25px] py-[15px]  "
-				>
-					Log in
-				</Link>
 			</div>
 		</Div>
 	);
 }
 
 export default AccountVerification;
+
 const Div = styled.div`
 	width: 800px;
 	margin: 0 auto;

@@ -12,9 +12,11 @@ import {
 	setLoading,
 	setLoginError,
 } from "../../state/actions/users";
+import { Loader } from "lucide-react";
 
 function ResetPassword() {
 	const [passwordToken, setPasswordToken] = useState("");
+	const [showPassword, setShowPassword] = useState(true);
 
 	const dispatch = useDispatch();
 	const { token } = useParams();
@@ -30,6 +32,7 @@ function ResetPassword() {
 			dispatch(setLoading(false));
 		};
 	}, []);
+
 	const formik = useFormik({
 		initialValues: {
 			newPassword: "",
@@ -47,18 +50,19 @@ function ResetPassword() {
 					return toast.success("Password reset successful");
 				}
 			} catch (err) {
-        dispatch(setLoading(false));
-        if (axios.isAxiosError(err) && err.response?.data?.message) {
-          if (
-            err?.response?.data.message ===
-            "Password reset token is invalid or has expired."
-          ) {
-            return toast.error("Password reset token is invalid or has expired");
-          } else {
-            toast.error("An error occured");
-          }
-        
-        }
+				dispatch(setLoading(false));
+				if (axios.isAxiosError(err) && err.response?.data?.message) {
+					if (
+						err?.response?.data.message ===
+						"Password reset token is invalid or has expired."
+					) {
+						return toast.error(
+							"Password reset token is invalid or has expired"
+						);
+					} else {
+						toast.error("An error occured");
+					}
+				}
 			}
 		},
 		validationSchema: Yup.object({
@@ -70,8 +74,13 @@ function ResetPassword() {
 				}),
 		}),
 	});
+
+	function handleBlur(e: React.FocusEvent<HTMLInputElement>) {
+		formik.handleBlur(e);
+		setShowPassword(false);
+	}
 	return (
-		<div className="forgot-password">
+		<div className="forgot-password py-6">
 			<ToastContainer
 				position="top-right"
 				autoClose={10000}
@@ -86,20 +95,21 @@ function ResetPassword() {
 			/>
 			<form>
 				<Div>
-					<img src={Logo} alt="CrossCheck" className="forgot-pass-img" />
-					<h3 style={{ textAlign: "center" }}>Create a New Password</h3>
+					<img src={Logo} alt="CrossCheck" className="forgot-pass-img mb-8" />
+					<h3 className="text-center mb-6">Create a New Password</h3>
 					<div className="password-input fields">
 						<label className="pass-label" htmlFor="email">
 							New Password
 						</label>
 						<input
-							type="text"
+							type={showPassword ? "text" : "password"}
 							className="forgot-pass-input"
 							name="newPassword"
 							id="newPassword"
 							value={formik.values.newPassword}
 							onChange={formik.handleChange}
-							onBlur={formik.handleBlur}
+							onFocus={() => setShowPassword(true)}
+							onBlur={handleBlur}
 						/>{" "}
 						{formik.touched.newPassword && formik.errors.newPassword ? (
 							<div className="passw-error">Enter password</div>
@@ -110,27 +120,34 @@ function ResetPassword() {
 							Confirm Password
 						</label>
 						<input
-							type="text"
+							type={showPassword ? "text" : "password"}
 							className="forgot-pass-input"
 							name="confirmPassword"
 							id="confirmPassword"
 							value={formik.values.confirmPassword}
 							onChange={formik.handleChange}
-							onBlur={formik.handleBlur}
+							onFocus={() => setShowPassword(true)}
+							onBlur={handleBlur}
 						/>
 						{formik.touched.confirmPassword && formik.errors.confirmPassword ? (
 							<div className="passw-error">{formik.errors.confirmPassword}</div>
 						) : null}
 					</div>
+
 					<button
 						type="button"
 						className="submit-button"
-						onClick={() =>formik.handleSubmit()}
+						onClick={() => formik.handleSubmit()}
+						disabled={formik.isSubmitting}
 					>
-						RESET PASSWORD
+						{formik.isSubmitting ? (
+							<Loader className="animate-spin mx-auto" />
+						) : (
+							"RESET PASSWORD"
+						)}
 					</button>
 
-					<div className="recover-pass">
+					<div className="recover-pass mt-3">
 						<p>
 							If you are having problems recovering your password
 							<Link
@@ -237,7 +254,6 @@ const Div = styled.div`
 	}
 	.submit-button {
 		outline: 0;
-		height: 40px;
 		border-radius: 15px;
 		margin: 0 auto;
 		width: 350px;
@@ -256,12 +272,10 @@ const Div = styled.div`
 		padding-top: 10px;
 		padding-bottom: 10px;
 		@media (max-width: 400px) {
-			height: 40px;
 			font-size: 12px;
 			width: 200px;
 		}
 		@media (max-width: 500px) {
-			height: 40px;
 			font-size: 12px;
 			width: 200px;
 		}
