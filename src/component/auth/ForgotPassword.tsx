@@ -1,22 +1,22 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
 import { useFormik } from "formik";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
 import * as Yup from "yup";
 import Logo from "../../asset/CrossCheckLogo.png";
 
+import axios from "axios";
 import {
 	forgotPassword,
 	setLoading,
 	setLoginError,
 } from "../../state/actions/users";
-import axios from "axios";
 import { RootState } from "../../store";
 
 const ForgotPassword = () => {
 	const [success, setSucces] = useState(false);
-	const { loginError, loading } = useSelector((state:RootState) => state.user);
+	const { loginError, loading } = useSelector((state: RootState) => state.user);
 	const dispatch = useDispatch();
 
 	useEffect(() => {

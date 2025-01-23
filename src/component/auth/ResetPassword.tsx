@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
-import { Link, useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import axios from "axios";
 import { useFormik } from "formik";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { Link, useParams } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
+import styled from "styled-components";
+import * as Yup from "yup";
 import Logo from "../../asset/CrossCheckLogo.png";
 import {
 	resetPassword,
 	setLoading,
 	setLoginError,
 } from "../../state/actions/users";
-import * as Yup from "yup";
-import axios from "axios";
 
 function ResetPassword() {
 	const [passwordToken, setPasswordToken] = useState("");
